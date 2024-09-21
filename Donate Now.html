@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Now</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #f0f4f8; /* Light background for peace */
+            color: #333; /* Darker text color for readability */
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        h1 {
+            color: #4CAF50; /* Green for humanity */
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: bounce 1s infinite alternate; /* Bounce animation */
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        .donation-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px auto;
+            width: 350px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        h2 {
+            color: #4CAF50; /* Green */
+            margin-bottom: 20px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #4CAF50; /* Green border */
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff;
+            color: black;
+            transition: border 0.3s;
+        }
+        input[type="number"]:focus, select:focus {
+            border-color: #388E3C; /* Darker Green */
+            outline: none;
+        }
+        button {
+            padding: 12px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #388E3C; /* Darker Green */
+            transform: translateY(-2px); /* Lift effect */
+        }
+        .info-text {
+            max-width: 400px;
+            margin: 20px auto;
+            font-size: 1.1em;
+            color: #555; /* Soft gray for readability */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .cash-donation-info {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #FF9800; /* Orange */
+        }
+    </style>
+</head>
+<body>
+
+<h1>The Public Bank</h1>
+<p>We are here for you. Who is "we"? We is us. Let us come together, pool, and help each other in times of great need.</p>
+
+<div class="donation-box">
+    <h2>We Must Fix Kenya</h2>
+    <p>Your donation helps us support those in need.</p>
+    <p>Choose your donation method:</p>
+    <select id="donationMethod" onchange="toggleMpesas()">
+        <option value="mpesa">M-Pesa</option>
+        <option value="paypal">PayPal</option>
+        <option value="cash">Cash Donation</option>
+    </select>
+
+    <div id="mpesaOptions" style="display: none;">
+        <label for="mpesaNumber">Select M-Pesa Number:</label>
+        <select id="mpesaNumber">
+            <option value="0799454341">0799454341</option>
+            <option value="0758723451">0758723451</option>
+        </select>
+    </div>
+
+    <input type="number" id="donationAmount" placeholder="Amount to Donate (KSh 50 - 500,000)" required>
+
+    <button type="submit" id="donateButton">Donate</button>
+
+    <div class="cash-donation-info" id="cashInfo" style="display: block;">
+        <p>For any cash/gift donation, visit <strong>The Management University of Africa, South C</strong> to complete your donation. Any physical items/gifts are accepted.</p>
+        <p>Call: <strong>0799454341</strong> or <strong>0758723451</strong></p>
+		<p><strong> Your Donation Is Highly Appreciated. Welcome Back Again</strong></p>
+    </div>
+</div>
+
+<div class="info-text">
+    <h3>MISSION</h3>
+    <p>In times of need, emergency, and desperation, it is crucial to support one another. Together, we can make a significant difference in the lives of those struggling. Your contribution—no matter how small—can bring hope and change.</p>
+</div>
+
+<script>
+    function toggleMpesas() {
+        const method = document.getElementById('donationMethod').value;
+        const mpesaOptions = document.getElementById('mpesaOptions');
+        mpesaOptions.style.display = method === 'mpesa' ? 'block' : 'none';
+    }
+
+    document.getElementById('donateButton').addEventListener('click', function() {
+        const amount = parseFloat(document.getElementById('donationAmount').value);
+        const method = document.getElementById('donationMethod').value;
+
+        if (amount < 50 || amount > 500000 || isNaN(amount)) {
+            alert("Please enter a donation amount between KSh 50 and KSh 500,000.");
+            return;
+        }
+
+        if (method === "mpesa") {
+            const selectedNumber = document.getElementById('mpesaNumber').value;
+            alert(`Please send your donation of KSh ${amount} to ${selectedNumber} via M-Pesa.`);
+        } else if (method === "paypal") {
+            alert(`Please send your donation of KSh ${amount} to mustafefafe@gmail.com via PayPal.`);
+            window.open('https://www.paypal.com/', '_blank'); // Redirect to PayPal
+        } else if (method === "cash") {
+            document.getElementById('cashInfo').style.display = 'block';
+            alert("Thank you for your willingness to donate in cash!");
+        }
+    });
+</script>
+
+</body>
+</html>
